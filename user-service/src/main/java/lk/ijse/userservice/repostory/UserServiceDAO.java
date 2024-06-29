@@ -1,4 +1,4 @@
 package lk.ijse.userservice.repostory;
 
-public class UserServiceDAO {
+public interface UserServiceDAO {
 }
