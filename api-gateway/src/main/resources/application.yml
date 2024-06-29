@@ -9,18 +9,6 @@ spring:
             uri: lb://user-service
             predicates:
               - Path=/api/v1/user/**
-          - id: vehicle-service
-            uri: lb://vehicle-service
-            predicates:
-              - Path=/api/v1/vehicle/**
-          - id: ticket-service
-            uri: lb://ticket-service
-            predicates:
-              - Path=/api/v1/ticket/**
-          - id: payment-service
-            uri: lb://payment-service
-            predicates:
-              - Path=/api/v1/payment/**
 server:
   port: 8080
 eureka:
