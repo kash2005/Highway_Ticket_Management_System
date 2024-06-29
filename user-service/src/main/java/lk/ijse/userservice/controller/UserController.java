@@ -22,5 +22,12 @@ public class UserController {
         return "User Service is running";
     }
 
-
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> saveUser(@RequestBody UserDTO userDTO, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return ResponseEntity.badRequest().body(bindingResult.getAllErrors());
+        }
+        userService.saveUser(userDTO);
+        return ResponseEntity.ok("User saved successfully");
+    }
 }
