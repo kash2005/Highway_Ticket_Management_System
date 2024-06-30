@@ -9,6 +9,8 @@ import lk.ijse.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class UserServiceIMPL implements UserService {
@@ -28,4 +30,14 @@ public class UserServiceIMPL implements UserService {
         }
         userServiceDAO.save(conversionData.mapTo(userDTO, UserEntity.class));
     }
+
+    @Override
+    public UserDTO getUser(String userId) {
+        if (!userServiceDAO.existsById(userId)){
+            return null;
+        }
+        return conversionData.mapTo(userServiceDAO.findById(userId).get(), UserDTO.class);
+    }
+
+
 }

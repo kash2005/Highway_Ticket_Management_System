@@ -39,4 +39,10 @@ public class UserController {
         userService.updateUser(userDTO);
         return ResponseEntity.ok("User updated successfully");
     }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<?> getUser(@PathVariable ("userId") String userId){
+        return ResponseEntity.ok(userService.getUser(userId));
+    }
+
 }
