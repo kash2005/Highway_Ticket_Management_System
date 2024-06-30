@@ -45,4 +45,10 @@ public class UserController {
         return ResponseEntity.ok(userService.getUser(userId));
     }
 
+    @GetMapping
+    public ResponseEntity<?> getAllUsers(){
+        return ResponseEntity.ok(userService.getAllUsers());
+    }
+
+
 }

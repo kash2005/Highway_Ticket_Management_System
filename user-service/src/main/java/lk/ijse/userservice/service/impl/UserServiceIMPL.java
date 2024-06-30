@@ -39,5 +39,10 @@ public class UserServiceIMPL implements UserService {
         return conversionData.mapTo(userServiceDAO.findById(userId).get(), UserDTO.class);
     }
 
+    @Override
+    public List<UserDTO> getAllUsers() {
+        return conversionData.mapTo(userServiceDAO.findAll(),UserDTO.class);
+    }
+
 
 }
