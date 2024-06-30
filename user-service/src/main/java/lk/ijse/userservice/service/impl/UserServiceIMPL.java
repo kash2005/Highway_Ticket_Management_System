@@ -20,4 +20,12 @@ public class UserServiceIMPL implements UserService {
     public void saveUser(UserDTO userDTO) {
         userServiceDAO.save(conversionData.mapTo(userDTO, UserEntity.class));
     }
+
+    @Override
+    public void updateUser(UserDTO userDTO) {
+        if (!userServiceDAO.existsById(userDTO.getUserId())){
+            return;
+        }
+        userServiceDAO.save(conversionData.mapTo(userDTO, UserEntity.class));
+    }
 }

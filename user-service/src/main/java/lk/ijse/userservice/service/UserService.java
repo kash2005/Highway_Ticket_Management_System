@@ -4,4 +4,6 @@ import lk.ijse.userservice.dto.UserDTO;
 
 public interface UserService {
     void saveUser(UserDTO userDTO);
+
+    void updateUser(UserDTO userDTO);
 }

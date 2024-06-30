@@ -30,4 +30,13 @@ public class UserController {
         userService.saveUser(userDTO);
         return ResponseEntity.ok("User saved successfully");
     }
+
+    @PutMapping()
+    public ResponseEntity<?> updateUser(@RequestBody UserDTO userDTO,BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return ResponseEntity.badRequest().body(bindingResult.getAllErrors());
+        }
+        userService.updateUser(userDTO);
+        return ResponseEntity.ok("User updated successfully");
+    }
 }
