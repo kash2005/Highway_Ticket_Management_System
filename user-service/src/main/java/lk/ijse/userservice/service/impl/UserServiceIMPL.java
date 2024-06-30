@@ -44,5 +44,9 @@ public class UserServiceIMPL implements UserService {
         return conversionData.mapTo(userServiceDAO.findAll(),UserDTO.class);
     }
 
+    @Override
+    public void deleteUser(String userId) {
+        userServiceDAO.deleteById(userId);
 
+    }
 }
