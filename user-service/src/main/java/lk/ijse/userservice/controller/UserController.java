@@ -3,7 +3,10 @@ package lk.ijse.userservice.controller;
 import lk.ijse.userservice.dto.UserDTO;
 import lk.ijse.userservice.entity.UserEntity;
 import lk.ijse.userservice.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -16,6 +19,7 @@ import javax.naming.Binding;
 public class UserController {
     @Autowired
     private UserService userService;
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @GetMapping("/health")
     private String health(){
@@ -54,5 +58,19 @@ public class UserController {
     public ResponseEntity<?> deleteUser(@PathVariable ("userId") String userId){
         userService.deleteUser(userId);
         return ResponseEntity.ok("User deleted successfully");
+    }
+
+    @GetMapping("/userExists/{userId}")
+    public ResponseEntity<?> isUserExists(@PathVariable String userId) {
+        logger.info("Checking user existence with ID: {}", userId);
+        try {
+            boolean isUserExists = userService.isUserExists(userId);
+            logger.info("User Exists: {}", isUserExists);
+            return ResponseEntity.ok(isUserExists);
+        } catch (Exception exception) {
+            logger.error("Error checking user existence: ", exception);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Internal server error | Unable to check user existence.\nMore Details\n" + exception);
+        }
     }
 }

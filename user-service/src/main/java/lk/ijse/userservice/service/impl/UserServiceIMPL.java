@@ -49,4 +49,9 @@ public class UserServiceIMPL implements UserService {
         userServiceDAO.deleteById(userId);
 
     }
+
+    @Override
+    public boolean isUserExists(String userId) {
+        return userServiceDAO.existsById(userId);
+    }
 }
