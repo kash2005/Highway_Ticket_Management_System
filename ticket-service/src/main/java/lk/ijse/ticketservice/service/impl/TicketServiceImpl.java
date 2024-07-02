@@ -1,6 +1,7 @@
 package lk.ijse.ticketservice.service.impl;
 
 import jakarta.transaction.Transactional;
+import lk.ijse.ticketservice.ENUM.TicketStatus;
 import lk.ijse.ticketservice.conversion.ConversionData;
 import lk.ijse.ticketservice.dto.TicketDTO;
 import lk.ijse.ticketservice.entity.TicketEntity;
@@ -69,6 +70,17 @@ public class TicketServiceImpl implements TicketService {
             tickeDTOs.add(conversionData.mapTo(ticketEntity, TicketDTO.class));
         }
         return tickeDTOs;
+    }
+
+    @Override
+    public boolean isTicketExists(String ticketId) {
+        if (ticketServiceDAO.existsById(ticketId)){
+            TicketDTO ticket = getTicket(ticketId);
+            ticket.setTicketStatus(TicketStatus.PAID);
+            updateTicket(ticket);
+            return true;
+        }
+        return false;
     }
 
 }

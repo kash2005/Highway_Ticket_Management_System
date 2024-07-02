@@ -54,4 +54,9 @@ public class UserServiceIMPL implements UserService {
     public boolean isUserExists(String userId) {
         return userServiceDAO.existsById(userId);
     }
+
+    @Override
+    public String generateUserId() {
+        return null;
+    }
 }

@@ -16,4 +16,6 @@ public interface UserService {
     void deleteUser(String userId);
 
     boolean isUserExists(String userId);
+
+    String generateUserId();
 }
